@@ -25,7 +25,7 @@ def question(data: list):
         option = input()
     return options[option](data)
 
- """ функция состовляет список из департаментов (без повторяющихся элементов), затем составляет список из словарей,
+"""функция состовляет список из департаментов (без повторяющихся элементов), затем составляет список из словарей,
  где ключи - департаменты, а значения - его отделы"""
 def hierarchy(data: list) -> dict:
     depart = []
@@ -70,8 +70,11 @@ def save_to_csv(data: list):
     final = display_report(data)
     head = ['Департамент', 'Кол-во работников', 'Макс зп', 'Мин зп', 'Средняя зп']
     final = [head] + final
-    import numpy as np
-    np.savetxt('results.csv', [p for p in final], delimiter=',', fmt='%s')
+    with open('results.csv', 'a') as f:
+        for sub in final:
+            for item in sub:
+                f.write(str(item) + ',')
+            f.write('\n')
 
 
 if __name__ == '__main__':
