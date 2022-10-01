@@ -1,3 +1,5 @@
+
+""" функция преобразует csv файл в текст и собирает в массив, где каждый элемент - массив с данными о работнике"""
 def csv_to_list(csv_file: str) -> list:
     with open(csv_file, 'r', encoding='utf8') as file:
         lines = file.readlines()
@@ -11,7 +13,7 @@ def csv_to_list(csv_file: str) -> list:
             line = line + 1
     return data
 
-
+""" функция выполняет одну из трех выбранных команд"""
 def question(data: list):
     print(f'Возможности: 1) Показать иерархию команд. 2) Вывести сводный отчёт по департаментам. '
           f'3) Сохранить сводный отчёт в csv-файл.'
@@ -23,7 +25,8 @@ def question(data: list):
         option = input()
     return options[option](data)
 
-
+ """ функция состовляет список из департаментов (без повторяющихся элементов), затем составляет список из словарей,
+ где ключи - департаменты, а значения - его отделы"""
 def hierarchy(data: list) -> dict:
     depart = []
     for row in data:
@@ -35,7 +38,7 @@ def hierarchy(data: list) -> dict:
             dep_kom[row['Департамент']].append(row['Отдел'])
     print(dep_kom)
 
-
+""" функция подсчитывает в каждом отделе кол-во работников, мин, макс, среднюю зарплату """
 def display_report(data: list) -> list:
     depart = []
     for row in data:
@@ -44,7 +47,7 @@ def display_report(data: list) -> list:
 
     worker: dict = {i: 0 for i in depart}
     min: dict = {i: 9999999999 for i in depart}
-    max: dict = {i: -1 for i in depart}
+    max: dict = {i: 0 for i in depart}
     sum: dict = {i: 0 for i in depart}
     avg: dict = {i: 0 for i in depart}
 
@@ -62,7 +65,7 @@ def display_report(data: list) -> list:
     print(final)
     return final
 
-
+""" функция сохраняет отчет о значениях по департаментам в csv формате"""
 def save_to_csv(data: list):
     final = display_report(data)
     head = ['Департамент', 'Кол-во работников', 'Макс зп', 'Мин зп', 'Средняя зп']
