@@ -2,11 +2,10 @@ class CountVectorizer:
     def __init__(self):
         self.words = []
         self.matrix = []
-        self.termfreq = []
         pass
 
     def fit_transform(self, some_text: list[str]) -> list:
-        mat=[]
+        mat = []
         for sentence in some_text:
             one = sentence.split()
             for word in one:
@@ -15,8 +14,8 @@ class CountVectorizer:
                     self.words.append(word)
         for sentence in some_text:
             one = str(sentence.split()).lower()
-            for uniqword in self.words:
-                number = one.count(uniqword)
+            for uniq_word in self.words:
+                number = one.count(uniq_word)
                 mat.append(number)
             self.matrix.append(mat)
             mat = []
