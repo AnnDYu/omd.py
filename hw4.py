@@ -4,7 +4,7 @@ import json5
 class ColorizeMixin():
     # миĸсин ColorizeMixin меняет цвет теĸста при выводе на ĸонсоль
     def __init__(self, repr_color_code):
-        self.repr_color_code = 33 #yellow
+        self.repr_color_code = 33  # yellow
 
 
 class Advert(ColorizeMixin):
@@ -23,7 +23,6 @@ class Advert(ColorizeMixin):
             else:
                 setattr(self, key, value)
 
-
     def __repr__(self):
         return f'\033[1;{self.repr_color_code};10m {self.title} | {self._price} ₽  \n'
 
@@ -37,7 +36,6 @@ lesson_str = """{
         }
     }"""
 
-
 if __name__ == '__main__':
     lesson = json5.loads(lesson_str)
     print(lesson)
@@ -46,6 +44,3 @@ if __name__ == '__main__':
     print(lesson_ad._price)
     print(lesson_ad.class_)
     print(lesson_ad)
-
-
-
